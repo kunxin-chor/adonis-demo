@@ -1,0 +1,11 @@
+<html>
+    <body>
+        <ul>
+            @each(b in books)
+                <li>{{b.title}} (ISBN: {{b.isbn}}) by {{b.author}}
+                <a href="{{ route('book.edit', { bookid: b.id }) }}">Edit</a>
+                </li>
+            @endeach
+        </ul>
+    </body>
+</html>

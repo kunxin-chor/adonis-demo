@@ -47,3 +47,10 @@ Route.post('/search', (context)=>{
     'search':submittedData.title
   })
 })
+
+// BookController
+Route.get('/books', 'BookController.get');
+Route.get('/books/create', 'BookController.showCreateForm')
+Route.post('/books/create', 'BookController.create')
+Route.get('/books/edit/:bookid', 'BookController.showEditForm').as('book.edit')
+Route.post('/books/edit/:bookid', 'BookController.update')

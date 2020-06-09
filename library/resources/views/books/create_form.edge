@@ -1,0 +1,16 @@
+<form method="POST">
+    {{ csrfField() }}
+    <div>
+        <label>Title:</label>
+        <input type="text" name="title">
+    </div>
+    <div>
+        <label>Author:</label>
+        <input type="text" name="author">
+    </div>
+    <div>
+        <label>ISBN:</label>
+        <input type="text" name="isbn">
+    </div>
+    <input type="submit" value="Add book"/>
+</form>
