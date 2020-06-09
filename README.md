@@ -66,6 +66,17 @@ Route.get('/addtwo', (context)=>{
 })
 ```
 
+Process the form with the route below:
+```
+Route.post('/addtwo', (context)=>{
+  const post = context.request.post();
+  let total = parseInt(post.n1) + parseInt(post.n2);
+  return context.view.render('result',{
+    total
+  })
+})
+```
+
 ## Models and Database
 Reminder: when using the GitPod template, the database user is `gitpod` with no password.
 
