@@ -1,9 +1,14 @@
 'use strict'
 const Book = use('App/Models/Book')
+const Plugins = use("PaulChor/Plugins")
 
 class BookController {
     // a function inside a class is known as a 'method'
     async get(context) {
+      let text = "quick brown fox";
+       text = Plugins.run_filter("process_text", text)
+       console.log("After filter, text=", text);
+        Plugins.run_action('greet');
         let books = await Book.all()
         books = books.toJSON();
         return context.view.render('books.show_books',{
