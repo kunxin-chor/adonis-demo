@@ -7,10 +7,22 @@ In the terminal, type in:
 
 ```
 npm i -g @adonisjs/cli
+npm i -s sqlite3
 adonis new <project-name>
 cd <project-name>
 adonis serve --dev
 ```
+
+If you are running an existing project by `git clone`
+
+```
+cd <project-name>
+yarn install
+adonis serve --dev
+```
+
+## Setup environment
+Duplicate `.env.example` and rename it as `.env`
 
 ## Routes
 
@@ -142,3 +154,57 @@ Add the additional fields in the file, inside the `up` function:
     })
   }
 ```
+
+# Providers
+
+1. Create new folder named `providers` in the project root.
+
+2. Create a new folder for the provider itself.
+
+3. Create `index.js` to hold the implementation
+
+4. Create the provider class:
+
+```
+const { ServiceProvider } = require('@adonisjs/fold')
+
+
+class PluginsProvider extends ServiceProvider {
+  register () {
+    this.app.singleton('PaulChor/Plugins', () => {
+      return require('.');
+    })
+  }
+}
+
+module.exports = PluginsProvider;
+```
+
+5. Register the provider:
+
+**Make sure to require the `path` library first**
+
+```
+const path = require('path')
+
+const providers = [
+  /* other providers above */
+  path.join(__dirname, '..', 'providers', 'Plugins/Provider')
+]
+```
+
+## Application Hooks
+In `app/hooks.js` (create the file if it does not exists)
+
+```
+const { hooks } = require('@adonisjs/ignitor')
+
+hooks.after.providersBooted(() => {
+  const View = use('View')
+  View.global('time', () => new Date().getTime())
+})
+```
+
+
+
+
